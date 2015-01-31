@@ -1,7 +1,7 @@
 {
   "name": "sflogger",
   "version": "0.0.1",
-  "description": "A simple graph generator for objects from Salesforce through Heroku Connect/Postgres",
+  "description": "A simple log viewer for objects from Salesforce through Heroku Connect/Postgres",
   "author": "Rohit Macherla <rohit.macherla@gmail.com>",
   "private": false,
   "scripts": {

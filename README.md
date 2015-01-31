@@ -1,0 +1,1 @@
+sf-lynx is a simple log viewer for records from Salesforce.com that reside in Heroku connect / Postgres DB.
