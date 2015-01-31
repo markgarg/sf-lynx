@@ -1,0 +1,20 @@
+{
+  "name": "sflogger",
+  "version": "0.0.1",
+  "description": "A simple graph generator for objects from Salesforce through Heroku Connect/Postgres",
+  "author": "Rohit Macherla <rohit.macherla@gmail.com>",
+  "private": false,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main":"./bin/www",
+  "engines": {
+    "node": "0.10.36"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "body-parser": "~1.0.0",
+    "pg": "4.2.x",
+    "mocha": "~2.1.0"
+  }
+}
