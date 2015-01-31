@@ -5,9 +5,8 @@
   "author": "Rohit Macherla <rohit.macherla@gmail.com>",
   "private": false,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/start"
   },
-  "main":"./bin/www",
   "engines": {
     "node": "0.10.36"
   },
