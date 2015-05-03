@@ -16,27 +16,25 @@ org.authenticate({ username: process.env.SF_USERNAME, password: process.env.SF_P
     console.log('Error: ' + err.message);
   } else {
     console.log('Successfully connected to salesforce');
-    console.log('Access Token: ' + resp.access_token);
+    // console.log('Access Token: ' + resp.access_token);
     oauth = resp;
-
     
-	var pt_name = process.env.STREAMING_TOPIC_NAME;
+	var topicName = process.env.STREAMING_TOPIC_NAME;
+	console.log('STREAMING_TOPIC_NAME :' + topicName);
+	if(null != topicName && topicName != 'undefined'){
+		var client = org.createStreamClient({oauth: resp});
 
-	// Create a connection to the Streaming API
-	var str = org.stream({ topic: pt_name });
+		var topicClient = client.subscribe({ topic: topicName });
 
-	str.on('connect', function(){
-	    console.log('connected to pushtopic');
-	});
+		topicClient.on('error', function(err) {
+			console.log('subscription error');
+			console.log(err);
+			client.disconnect();
+		});
 
-	str.on('error', function(error) {
-	    console.log('error: ' + error);
-	});
-
-	str.on('data', function(data) {
-	    // Data will contain details of the streaming notification:
-
-	    console.log(data);
-	});
+		topicClient.on('data', function(data) {
+			console.log(data);
+		});
+	}
   }
 });
