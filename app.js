@@ -22,8 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // =============================================================================
 // var router = express.Router();              // get an instance of the express Router
 var streamingAPI = require('./routes/streaming-api-access');
+var logCalculator = require('./routes/log-calculator');
 app.get('/', function (req, res) {
-  res.render('page-home', {title: 'Salesforce log viewer'});
+  logCalculator.displayLog(req, res);
 });
 
 // catch 404 and forward to error handler
