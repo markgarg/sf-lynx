@@ -9,13 +9,37 @@ html(lang='en-US', xmlns='http://www.w3.org/1999/xhtml')
     block content
     p Welcome to sf-lynx
     #msgs
+    #lineChart.epoch(style="height:200px;")
 
     script(type="text/javascript", src="//cdn.socket.io/socket.io-1.3.5.js")
     script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+    script(type="text/javascript", src="/js/d3.v348.js")
+    script(type="text/javascript", src="/js/epoch.min.js")
+    link(rel="stylesheet", href="/styles/epoch.min.css")
     script(type="text/javascript").
-      var socket = io();
-      socket.on('connect', function () {
-        socket.on('pageview', function (msg) {
-            $('#msgs').append('<li>' + msg.url + '</li>');
+      $(document).ready(function(){
+        var socket = io();
+        socket.on('connect', function () {
+          socket.on('pageview', function (msg) {
+              $('#msgs').append('<li>' + msg.url + '</li>');
+          });
+        });
+        socket.on('count', function (data) {
+          var millis = new Date().getTime();
+          chartData[0].values.push({time: millis, y:data.length})
         });
       });
+      var now = new Date().getTime();
+      //var basicCountValues = [{time:now, y: 0}];
+      var chartData = [{label: "Count of records", values: [{time:now, y:0}]}];
+      chartData[0].values.push([{"values":[{"time":1431853859,"y":120},{"time":1431853860,"y":59},{"time":1431853861,"y":53},{"time":1431853862,"y":70},{"time":1431853863,"y":107},{"time":1431853864,"y":123},{"time":1431853865,"y":69},{"time":1431853866,"y":120},{"time":1431853867,"y":77},{"time":1431853868,"y":64},{"time":1431853869,"y":147},{"time":1431853870,"y":75},{"time":1431853871,"y":130},{"time":1431853872,"y":131},{"time":1431853873,"y":126},{"time":1431853874,"y":127},{"time":1431853875,"y":103},{"time":1431853876,"y":51},{"time":1431853877,"y":78},{"time":1431853878,"y":61},{"time":1431853879,"y":77},{"time":1431853880,"y":135},{"time":1431853881,"y":62},{"time":1431853882,"y":71},{"time":1431853883,"y":121},{"time":1431853884,"y":95},{"time":1431853885,"y":149},{"time":1431853886,"y":98},{"time":1431853887,"y":135},{"time":1431853888,"y":65},{"time":1431853889,"y":143},{"time":1431853890,"y":95},{"time":1431853891,"y":108},{"time":1431853892,"y":130},{"time":1431853893,"y":105},{"time":1431853894,"y":96},{"time":1431853895,"y":93},{"time":1431853896,"y":67},{"time":1431853897,"y":74},{"time":1431853898,"y":81},{"time":1431853899,"y":111},{"time":1431853900,"y":128},{"time":1431853901,"y":105},{"time":1431853902,"y":113},{"time":1431853903,"y":66},{"time":1431853904,"y":72},{"time":1431853905,"y":101},{"time":1431853906,"y":128},{"time":1431853907,"y":94},{"time":1431853908,"y":54},{"time":1431853909,"y":112},{"time":1431853910,"y":70},{"time":1431853911,"y":64},{"time":1431853912,"y":100},{"time":1431853913,"y":146},{"time":1431853914,"y":72},{"time":1431853915,"y":105},{"time":1431853916,"y":90},{"time":1431853917,"y":107},{"time":1431853918,"y":143}]}]);
+      var lineChart = $('#lineChart').epoch({
+        type: 'time.line',
+        data: chartData
+        ,axes: ['left', 'bottom']
+      });
+
+      setInterval(function(){
+        var millis = new Date().getTime();
+        chartData[0].values.push([{"time": millis, "y": 1}]);
+      }, 1000);

@@ -21,7 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES FOR OUR APP
 // =============================================================================
 // var router = express.Router();              // get an instance of the express Router
-var streamingAPI = require('./routes/streaming-api-access');
 var logCalculator = require('./routes/log-calculator');
 app.get('/', function (req, res) {
   logCalculator.displayLog(req, res);
@@ -59,3 +58,24 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+app.set('port', process.env.PORT || 3000);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(app.get('port'));
+io.on('connection', function (socket) {
+ 	console.log('Socket.io connection established :' + socket);
+    socket.on('message', function (message) {
+        console.log("Got message: " + message);
+        socket.emit('pageview', { 'url': message, for: 'everyone' });
+    });
+ 	
+ 	socket.on('disconnect', function(){
+	    console.log('user disconnected');
+	});
+
+});
+
+var streamingAPI = require('./routes/streaming-api-access');
+streamingAPI.initializeStreamingAPI(io);

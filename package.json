@@ -5,7 +5,7 @@
   "author": "Rohit Macherla <rohit.macherla@gmail.com>",
   "private": false,
   "scripts": {
-    "start": "node ./bin/start"
+    "start": "node app"
   },
   "engines": {
     "node": "0.10.36"

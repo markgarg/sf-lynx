@@ -1,4 +1,7 @@
+
 var nforce = require('nforce');
+var logCalculator = require(process.cwd() + '/routes/log-calculator');
+
 var org = nforce.createConnection({
   clientId: process.env.SF_CLIENT_ID,
   clientSecret: process.env.SF_CLIENT_SECRET,
@@ -8,6 +11,7 @@ var org = nforce.createConnection({
   mode: 'multi' // optional, 'single' or 'multi' user mode, multi default
 });
 
+exports.initializeStreamingAPI = function(io){
 // multi user mode
 var oauth;
 org.authenticate({ username: process.env.SF_USERNAME, password: process.env.SF_PASSWORD}, function(err, resp){
@@ -34,7 +38,13 @@ org.authenticate({ username: process.env.SF_USERNAME, password: process.env.SF_P
 
 		topicClient.on('data', function(data) {
 			console.log(data);
+			logCalculator.calculate(function(count){
+				console.log('topicClient.on.count :' + count);
+				console.log('topicClient.on.io :' + io);
+				logCalculator.sendToGraph(io, count);
+			});
 		});
 	}
   }
 });
+}
