@@ -37,10 +37,11 @@ org.authenticate({ username: process.env.SF_USERNAME, password: process.env.SF_P
 		});
 
 		topicClient.on('data', function(data) {
+			// sample data : { event: { type: 'deleted', createdDate: '2015-07-18T16:33:43.000+0000' },  sobject: { Id: 'a0328000001ZrZ0AAK' } }
 			console.log(data);
 			logCalculator.calculate(function(count){
 				console.log('topicClient.on.count :' + count);
-				console.log('topicClient.on.io :' + io);
+				// console.log('topicClient.on.io :' + io);
 				logCalculator.sendToGraph(io, count);
 			});
 		});

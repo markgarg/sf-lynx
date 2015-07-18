@@ -37,8 +37,11 @@ html(lang='en-US', xmlns='http://www.w3.org/1999/xhtml')
           });
         });
         socket.on('count', function (data) {
+          console.log('count> data :' + JSON.stringify(data));
           var millis = ((new Date()).getTime() / 1000)|0;
-          lineChart.push([{"time": millis, "y":data.length}]);
+          if(typeof data.number != undefined){
+            lineChart.push([{"time": millis, "y":data.number}]);
+          }
         });
 
         // Set up basic count at 0

@@ -71,6 +71,11 @@ io.on('connection', function (socket) {
         socket.emit('pageview', { 'url': message, for: 'everyone' });
     });
  	
+ 	socket.on('count', function (message) {
+        console.log("Got message: " + message);
+        socket.emit('pageview', { 'url': message, for: 'everyone' });
+    });
+
  	socket.on('disconnect', function(){
 	    console.log('user disconnected');
 	});

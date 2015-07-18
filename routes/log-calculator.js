@@ -5,7 +5,7 @@ exports.displayLog = function(req, res){
 exports.calculate = function(callback){
 	var count = 0;
 	count = Math.floor(Math.random() * 10);
-
+	console.log('log-calculator>test count in calculate :' + count);
 	callback(count);
 }
 
