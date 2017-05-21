@@ -1,0 +1,21 @@
+{
+  "name": "sflogger",
+  "description": "A simple log viewer for objects from Salesforce through Heroku Connect/Postgres",
+  "main": "",
+  "authors": [
+    "Rohit Macherla <rohit.macherla@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/markgarg/sf-lynx",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io": "^2.0.1",
+    "jquery": "^3.2.1"
+  }
+}

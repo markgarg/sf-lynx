@@ -1,7 +1,7 @@
 var nforce = require('nforce');
 var org = nforce.createConnection({
-  clientId: process.env.SF_CLIENT_ID,
-  clientSecret: process.env.SF_CLIENT_SECRET,
+  clientId: process.env.SF_CLIENT_ID || 'blah',
+  clientSecret: process.env.SF_CLIENT_SECRET || 'blah',
   redirectUri: 'http://localhost:3000/oauth/_callback',
   apiVersion: 'v31.0',  // optional, defaults to current salesforce API version
   environment: 'production',  // optional, salesforce 'sandbox' or 'production', production default
@@ -21,7 +21,7 @@ org.authenticate({ username: process.env.SF_USERNAME, password: process.env.SF_P
     
 	var topicName = process.env.STREAMING_TOPIC_NAME;
 	console.log('STREAMING_TOPIC_NAME :' + topicName);
-	if(null != topicName && topicName != 'undefined'){
+	if(null !== topicName && topicName !== 'undefined'){
 		var client = org.createStreamClient({oauth: resp});
 
 		var topicClient = client.subscribe({ topic: topicName });

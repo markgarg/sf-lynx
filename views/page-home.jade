@@ -10,8 +10,8 @@ html(lang='en-US', xmlns='http://www.w3.org/1999/xhtml')
     p Welcome to sf-lynx
     #msgs
 
-    script(type="text/javascript", src="//cdn.socket.io/socket.io-1.3.5.js")
-    script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+    script(type="text/javascript", src="lib/socket.io/lib/socket.js")
+    script(type="text/javascript", src="lib/jquery/dist/jquery.min.js") 
     script(type="text/javascript").
       var socket = io();
       socket.on('connect', function () {

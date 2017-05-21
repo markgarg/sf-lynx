@@ -1,6 +1,6 @@
 {
   "name": "sflogger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple log viewer for objects from Salesforce through Heroku Connect/Postgres",
   "author": "Rohit Macherla <rohit.macherla@gmail.com>",
   "private": false,
@@ -8,7 +8,7 @@
     "start": "node ./bin/start"
   },
   "engines": {
-    "node": "0.10.36"
+    "node": "6.10.3"
   },
   "dependencies": {
     "body-parser": "~1.8.*",
@@ -17,7 +17,7 @@
     "jade": "~1.6.0",
     "mocha": "~2.1.0",
     "morgan": "~1.3.0",
-    "nforce": "1.1.*",
+    "nforce": "^1.7.0",
     "pg": "4.2.x",
     "socket.io": "^1.3.5"
   },
@@ -37,5 +37,14 @@
     "STREAMING_TOPIC_NAME": {
       "description": "Push topic name for the object you want to log"
     }
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-jshint": "^2.0.4",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1"
   }
 }
